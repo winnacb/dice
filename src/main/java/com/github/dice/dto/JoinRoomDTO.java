@@ -1,5 +1,5 @@
 package com.github.dice.dto;
 
-public class JoinHomeDTO {
+public class JoinRoomDTO {
 
 }

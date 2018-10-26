@@ -1,43 +1,43 @@
 package com.github.dice.data;
 
-import com.github.dice.domain.Householder;
+import com.github.dice.domain.RoomOwner;
 
 import java.util.List;
 
 public class HouseholderData {
 
-    public static List<Householder> householders;
+    public static List<RoomOwner> roomOwners;
 
     static {
-        Householder alice = new Householder();
+        RoomOwner alice = new RoomOwner();
         alice.setPwd("123");
-        alice.setHouseholderId(1);
+        alice.setId(1);
         alice.setUserName("emma");
-        householders.add(alice);
+        roomOwners.add(alice);
 
-        Householder amanda = new Householder();
+        RoomOwner amanda = new RoomOwner();
         amanda.setPwd("123");
         amanda.setUserName("amanda");
-        amanda.setHouseholderId(2);
-        householders.add(amanda);
+        amanda.setId(2);
+        roomOwners.add(amanda);
 
-        Householder amelia = new Householder();
+        RoomOwner amelia = new RoomOwner();
         amelia.setPwd("123");
-        amelia.setHouseholderId(3);
+        amelia.setId(3);
         amelia.setUserName("amelia");
-        householders.add(amelia);
+        roomOwners.add(amelia);
 
-        Householder amy = new Householder();
-        amy.setHouseholderId(4);
+        RoomOwner amy = new RoomOwner();
+        amy.setId(4);
         amy.setUserName("amy");
         amy.setPwd("123");
-        householders.add(amy);
+        roomOwners.add(amy);
 
-        Householder anna = new Householder();
-        anna.setHouseholderId(5);
+        RoomOwner anna = new RoomOwner();
+        anna.setId(5);
         anna.setUserName("anna");
         anna.setPwd("123");
-        householders.add(anna);
+        roomOwners.add(anna);
     }
 
 }

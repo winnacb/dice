@@ -19,7 +19,7 @@ public class PlayService {
 
     public Player getPlayById(int userId){
         for (Player player : PlayData.players) {
-            if(player.getPlayerId() == userId){
+            if(player.getId() == userId){
                 return player;
             }
         }

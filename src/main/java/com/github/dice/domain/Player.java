@@ -4,18 +4,18 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class Player {
 
-   private int playerId;
+   private int id;
 
    private String userName;
 
    private String pwd;
 
-   public int getPlayerId() {
-      return playerId;
+   public int getId() {
+      return id;
    }
 
-   public void setPlayerId(int playerId) {
-      this.playerId = playerId;
+   public void setId(int id) {
+      this.id = id;
    }
 
    public String getUserName() {
