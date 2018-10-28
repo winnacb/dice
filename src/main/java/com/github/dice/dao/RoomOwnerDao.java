@@ -77,7 +77,7 @@ public class RoomOwnerDao {
 
 
     private String getXmlPath() {
-        return path + "/openRoom.xml";
+        return path + "/roomOwner.xml";
     }
 
 }

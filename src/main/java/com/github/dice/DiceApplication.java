@@ -13,6 +13,9 @@ public class DiceApplication {
         return "Hello Spring Boot";
     }
     public static void main(String[] args) {
+
         SpringApplication.run(DiceApplication.class, args);
     }
+
+
 }

@@ -2,18 +2,19 @@ package com.github.dice.data;
 
 import com.github.dice.domain.RoomOwner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RoomOwnerData {
 
-    public static List<RoomOwner> roomOwners;
+    public static List<RoomOwner> roomOwners=new ArrayList<>(5);
 
     static {
-        RoomOwner alice = new RoomOwner();
-        alice.setPwd("123");
-        alice.setId("1");
-        alice.setUserName("emma");
-        roomOwners.add(alice);
+        RoomOwner admin = new RoomOwner();
+        admin.setPwd("123");
+        admin.setUserName("admin");
+        admin.setId("1");
+        roomOwners.add(admin);
 
         RoomOwner amanda = new RoomOwner();
         amanda.setPwd("123");
