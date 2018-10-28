@@ -1,6 +1,6 @@
 package com.github.dice.dao;
 
-import com.github.dice.domain.Room;
+import com.github.dice.entity.Room;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -17,16 +17,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component("roomDao")
+@Component
 public class RoomDao {
 
     private static final String ROOM_NAME = "roomName";
 
-    private static final String PWD = "pwd";
+    private static final String ROOM_PWD = "roomPwd";
 
     private static final String ROOM_NUMBER = "roomNumber";
 
-   private Logger logger = LoggerFactory.getLogger(RoomDao.class);
+    private Logger logger = LoggerFactory.getLogger(RoomDao.class);
 
     @Value("${data.dir}")
     private String path;
@@ -38,13 +38,12 @@ public class RoomDao {
         Element root = doc.getRootElement();
 
         Element roomElement = root.addElement("room");
-        roomElement.addAttribute("id", String.valueOf(room.getId()));
 
         Element roomName = roomElement.addElement(ROOM_NAME);
         roomName.setText(room.getRoomName());
 
-        Element pwd = roomElement.addElement(PWD);
-        pwd.setText(room.getPwd());
+        Element pwd = roomElement.addElement(ROOM_PWD);
+        pwd.setText(room.getRoomPwd());
 
         Element roomNumber = roomElement.addElement(ROOM_NUMBER);
         roomNumber.setText(room.getRoomNumber());
@@ -63,12 +62,11 @@ public class RoomDao {
             List<Element> list = (List<Element>) doc.selectNodes("/rooms/room");
             for (Element element : list) {
                 Room room = new Room();
-                room.setId(element.attribute(0).getValue());
                 for (Element item : (List<Element>) element.content()) {
                     if (item.getName().equalsIgnoreCase(ROOM_NAME)) {
                         room.setRoomName(element.getText());
-                    } else if (item.getName().equalsIgnoreCase(PWD)) {
-                        room.setPwd(element.getText());
+                    } else if (item.getName().equalsIgnoreCase(ROOM_PWD)) {
+                        room.setRoomPwd(element.getText());
                     } else if (item.getName().equalsIgnoreCase(ROOM_NUMBER)) {
                         room.setRoomNumber(element.getText());
                     }
@@ -76,7 +74,7 @@ public class RoomDao {
                 rooms.add(room);
             }
         } catch (Exception e) {
-            logger.warn("playerDao selectAll is exception", e);
+            logger.warn("RoomDao selectAll is exception", e);
         }
         return rooms;
     }

@@ -223,7 +223,7 @@ public class MyReflectionUtils extends ReflectionUtils {
         });
 
         if (fields.size() > 1) {
-                throw new IllegalStateException("be commented" + type.getSimpleName() + "The declared domain is not unique");
+                throw new IllegalStateException("be commented" + type.getSimpleName() + "The declared entity is not unique");
         } else if (fields.size() == 1) {
             return fields.get(0);
         }

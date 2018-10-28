@@ -2,7 +2,7 @@ package com.github.dice.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.github.dice.constant.ErrorEnums;
-import com.github.dice.domain.Player;
+import com.github.dice.entity.Player;
 import com.github.dice.dto.ResultDTO;
 import com.github.dice.service.PlayerService;
 import org.springframework.util.ObjectUtils;
@@ -23,9 +23,9 @@ public class PlayerController {
 
     @PostMapping("/login")
     public String login(@RequestParam String userName, @RequestParam String pwd, HttpServletRequest request) {
-        Player player = playerService.login(userName, pwd);
+        Player player = playerService.getPlayByNameAndPwd(userName, pwd);
         if (!ObjectUtils.isEmpty(player)) {
-            request.getSession().setAttribute("login_data" , player);
+            request.getSession().setAttribute("player_login_data", player);
             return JSON.toJSONString(new ResultDTO<>(player));
         } else {
             return JSON.toJSONString(new ResultDTO(ErrorEnums.E_5001));
@@ -34,12 +34,16 @@ public class PlayerController {
 
 
     @PostMapping("/getPlayerBySession")
-    public String getPlayerBySession(HttpServletRequest request){
-        Player player =(Player) request.getSession().getAttribute("login_data");
-        if(ObjectUtils.isEmpty(player)){
+    public String getPlayerBySession(@RequestParam String userName, HttpServletRequest request) {
+        Player player = (Player) request.getSession().getAttribute("player_login_data");
+        if (ObjectUtils.isEmpty(player)) {
             return JSON.toJSONString(new ResultDTO<>(ErrorEnums.E_5002));
-        }else{
-            return JSON.toJSONString(new ResultDTO<>(player));
+        } else {
+            if (player.getPlayerName().equals(userName)) {
+                return JSON.toJSONString(new ResultDTO<>(player));
+            } else {
+                return JSON.toJSONString(new ResultDTO<>(ErrorEnums.E_5002));
+            }
         }
     }
 

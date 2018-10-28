@@ -1,7 +1,6 @@
 package com.github.dice.dao;
 
-import com.github.dice.domain.Room;
-import com.github.dice.domain.RoomOwner;
+import com.github.dice.entity.RoomOwner;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -21,11 +20,11 @@ import java.util.List;
 @Component
 public class RoomOwnerDao {
 
-    private static String USER_NAME = "userName";
+    private static String ROOM_OWNER_NAME = "ROOM_OWNER_NAME";
 
-    private static String PWD = "pwd";
+    private static String ROOM_OWNER_PWD = "roomOwnerPwd";
 
-   private Logger logger = LoggerFactory.getLogger(RoomDao.class);
+    private Logger logger = LoggerFactory.getLogger(RoomDao.class);
 
     @Value("${data.dir}")
     private String path;
@@ -37,13 +36,12 @@ public class RoomOwnerDao {
         Element root = doc.getRootElement();
 
         Element roomOwnerElement = root.addElement("roomOwner");
-        roomOwnerElement.addAttribute("id", String.valueOf(roomOwner.getId()));
 
-        Element userName = roomOwnerElement.addElement(USER_NAME);
-        userName.setText(roomOwner.getUserName());
+        Element userName = roomOwnerElement.addElement(ROOM_OWNER_NAME);
+        userName.setText(roomOwner.getRoomOwnerName());
 
-        Element pwd = roomOwnerElement.addElement(PWD);
-        pwd.setText(roomOwner.getPwd());
+        Element pwd = roomOwnerElement.addElement(ROOM_OWNER_PWD);
+        pwd.setText(roomOwner.getRoomOwnerPwd());
 
         XMLWriter output = new XMLWriter(new FileWriter(new File(path)));
         output.write(doc);
@@ -59,18 +57,17 @@ public class RoomOwnerDao {
             List<Element> list = (List<Element>) doc.selectNodes("/roomOwners/roomOwner");
             for (Element element : list) {
                 RoomOwner roomOwner = new RoomOwner();
-                roomOwner.setId(element.attribute(0).getValue());
                 for (Element item : (List<Element>) element.content()) {
-                    if (item.getName().equalsIgnoreCase(USER_NAME)) {
-                        roomOwner.setUserName(element.getText());
-                    } else if (item.getName().equalsIgnoreCase(PWD)) {
-                        roomOwner.setPwd(element.getText());
+                    if (item.getName().equalsIgnoreCase(ROOM_OWNER_NAME)) {
+                        roomOwner.setRoomOwnerName(item.getText());
+                    } else if (item.getName().equalsIgnoreCase(ROOM_OWNER_PWD)) {
+                        roomOwner.setRoomOwnerPwd(item.getText());
                     }
                 }
                 roomOwners.add(roomOwner);
             }
         } catch (Exception e) {
-            logger.warn("playerDao selectAll is exception", e);
+            logger.warn("RoomOwnerDao selectAll is exception", e);
         }
         return roomOwners;
     }

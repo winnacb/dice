@@ -1,22 +1,25 @@
-package com.github.dice.domain;
+package com.github.dice.dto;
 
+import com.github.dice.entity.Player;
+import com.github.dice.entity.RoomOwner;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.List;
 
-public class Room {
-
-    private String id;
+public class RoomDTO {
 
     private String roomName;
 
     private String roomNumber;
 
-    private String pwd;
+    private String roomPwd;
+
+    private String playerCount;
 
     private RoomOwner roomOwner;
 
     private List<Player> playerList;
+
 
     public String getRoomName() {
         return roomName;
@@ -34,12 +37,20 @@ public class Room {
         this.roomNumber = roomNumber;
     }
 
-    public String getPwd() {
-        return pwd;
+    public String getRoomPwd() {
+        return roomPwd;
     }
 
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
+    public void setRoomPwd(String roomPwd) {
+        this.roomPwd = roomPwd;
+    }
+
+    public String getPlayerCount() {
+        return playerCount;
+    }
+
+    public void setPlayerCount(String playerCount) {
+        this.playerCount = playerCount;
     }
 
     public RoomOwner getRoomOwner() {
@@ -58,16 +69,8 @@ public class Room {
         this.playerList = playerList;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     @Override
     public String toString() {
-       return ToStringBuilder.reflectionToString(this);
+        return ToStringBuilder.reflectionToString(this);
     }
 }

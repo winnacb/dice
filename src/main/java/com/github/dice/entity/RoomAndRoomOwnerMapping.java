@@ -1,16 +1,12 @@
-package com.github.dice.dto;
+package com.github.dice.entity;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class OpenRoomDTO {
+public class RoomAndRoomOwnerMapping {
 
     private String roomNumber;
 
     private String roomName;
-
-    private String roomPwd;
-
-    private String playerCount;
 
     private String roomOwnerName;
 
@@ -30,21 +26,7 @@ public class OpenRoomDTO {
         this.roomName = roomName;
     }
 
-    public String getRoomPwd() {
-        return roomPwd;
-    }
 
-    public void setRoomPwd(String roomPwd) {
-        this.roomPwd = roomPwd;
-    }
-
-    public String getPlayerCount() {
-        return playerCount;
-    }
-
-    public void setPlayerCount(String playerCount) {
-        this.playerCount = playerCount;
-    }
 
     public String getRoomOwnerName() {
         return roomOwnerName;

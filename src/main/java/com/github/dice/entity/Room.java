@@ -1,16 +1,27 @@
-package com.github.dice.dto;
+package com.github.dice.entity;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class JoinRoomDTO {
+import java.util.List;
 
-    private String roomNumber;
+public class Room {
 
     private String roomName;
 
+    private String roomNumber;
+
     private String roomPwd;
 
-    private String playerName;
+    private String playerCount;
+
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
+    }
 
     public String getRoomNumber() {
         return roomNumber;
@@ -28,20 +39,13 @@ public class JoinRoomDTO {
         this.roomPwd = roomPwd;
     }
 
-    public String getPlayerName() {
-        return playerName;
+
+    public String getPlayerCount() {
+        return playerCount;
     }
 
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
-    }
-
-    public String getRoomName() {
-        return roomName;
-    }
-
-    public void setRoomName(String roomName) {
-        this.roomName = roomName;
+    public void setPlayerCount(String playerCount) {
+        this.playerCount = playerCount;
     }
 
     @Override

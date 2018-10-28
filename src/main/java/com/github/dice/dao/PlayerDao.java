@@ -1,6 +1,6 @@
 package com.github.dice.dao;
 
-import com.github.dice.domain.Player;
+import com.github.dice.entity.Player;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -20,7 +20,11 @@ import java.util.List;
 @Component
 public class PlayerDao {
 
-   private Logger logger = LoggerFactory.getLogger(PlayerDao.class);
+    public static final String PLAYER_NAME = "playerName";
+
+    public static final String PLAYER_PWD = "playerPwd";
+
+    private Logger logger = LoggerFactory.getLogger(PlayerDao.class);
 
     @Value("${data.dir}")
     private String path;
@@ -32,13 +36,12 @@ public class PlayerDao {
         Element root = doc.getRootElement();
 
         Element playerElement = root.addElement("player");
-        playerElement.addAttribute("id", String.valueOf(player.getId()));
 
-        Element userName = playerElement.addElement("userName");
-        userName.setText(player.getUserName());
+        Element userName = playerElement.addElement(PLAYER_NAME);
+        userName.setText(player.getPlayerName());
 
-        Element pwd = playerElement.addElement("pwd");
-        pwd.setText(player.getPwd());
+        Element pwd = playerElement.addElement(PLAYER_PWD);
+        pwd.setText(player.getPlayerPwd());
 
         XMLWriter output = new XMLWriter(new FileWriter(new File(path)));
         output.write(doc);
@@ -54,18 +57,17 @@ public class PlayerDao {
             List<Element> list = (List<Element>) doc.selectNodes("/players/player");
             for (Element element : list) {
                 Player player = new Player();
-                player.setId(element.attribute(0).getValue());
                 for (Element item : (List<Element>) element.content()) {
-                    if (item.getName().equalsIgnoreCase("userName")) {
-                        player.setUserName(element.getText());
-                    } else if (item.getName().equalsIgnoreCase("pwd")) {
-                        player.setPwd(element.getText());
+                    if (item.getName().equalsIgnoreCase(PLAYER_NAME)) {
+                        player.setPlayerName(item.getText());
+                    } else if (item.getName().equalsIgnoreCase(PLAYER_PWD)) {
+                        player.setPlayerPwd(item.getText());
                     }
                 }
                 players.add(player);
             }
         } catch (Exception e) {
-            logger.warn("playerDao selectAll is exception", e);
+            logger.warn("PlayerDao selectAll is exception", e);
         }
         return players;
     }
