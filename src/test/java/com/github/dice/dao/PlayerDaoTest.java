@@ -1,5 +1,6 @@
 package com.github.dice.dao;
 
+import com.github.dice.data.PlayData;
 import com.github.dice.domain.Player;
 import org.dom4j.DocumentException;
 import org.junit.Test;
@@ -13,6 +14,7 @@ import org.springframework.util.CollectionUtils;
 import javax.annotation.Resource;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 @RunWith(SpringRunner.class)
@@ -26,19 +28,16 @@ public class PlayerDaoTest {
 
     @Test
     public void addPlayer() throws IOException, DocumentException {
-        //for (Player player: PlayData.players) {
-        Player player = new Player();
+        for (Player player: PlayData.players) {
             playerDao.addPlayer(player);
-        //}
+        }
     }
 
     @Test
     public void selectAll() {
-        Map<String, Object> map = playerDao.selectAll();
-        if(!CollectionUtils.isEmpty(map)) {
-            for (Map.Entry<String, Object> item : map.entrySet()) {
-                logger.info("key:" + item.getKey() + "value:" + item.getValue());
-            }
+        List<Player> list = playerDao.selectAll();
+        for (Player player:list) {
+            logger.info("id:"+player.getId());
         }
     }
 

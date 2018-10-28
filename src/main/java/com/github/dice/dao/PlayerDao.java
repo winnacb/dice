@@ -1,11 +1,13 @@
 package com.github.dice.dao;
 
 import com.github.dice.domain.Player;
+import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
+import org.dom4j.tree.DefaultElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,7 +19,7 @@ import java.util.*;
 @Component
 public class PlayerDao {
 
-    Logger logger = LoggerFactory.getLogger(PlayerDao.class);
+   private Logger logger = LoggerFactory.getLogger(PlayerDao.class);
 
     @Value("${data.dir}")
     private String path;
@@ -42,33 +44,33 @@ public class PlayerDao {
         output.close();
     }
 
-    public Map<String, Object> selectAll() {
+    public List<Player> selectAll() {
+        List<Player> players = new ArrayList<>();
         try {
             String path = getXmlPath();
             SAXReader saxReader = new SAXReader();
             Document doc = saxReader.read(new File(path));
-            Element root = doc.getRootElement();
-            List<Element> childElements = root.elements();
-            Map<String, Object> mapEle = new HashMap<>();
-            return getAllElements(childElements, mapEle);
+            List<Element> list = (List<Element>) doc.selectNodes("/players/player");
+            for (Element element : list) {
+                Player player = new Player();
+                player.setId(element.attribute(0).getValue());
+                for (Element item : (List<Element>) element.content()) {
+                    if (item.getName().equalsIgnoreCase("userName")) {
+                        player.setUserName(element.getText());
+                    } else if (item.getName().equalsIgnoreCase("pwd")) {
+                        player.setPwd(element.getText());
+                    }
+                }
+                players.add(player);
+            }
         } catch (Exception e) {
             logger.warn("playerDao selectAll is exception", e);
         }
-        return null;
-    }
-
-    private Map<String, Object> getAllElements(List<Element> childElements, Map<String, Object> mapEle) {
-        for (Element ele : childElements) {
-            mapEle.put(ele.getName(), ele.getText());
-            if (ele.elements().size() > 0) {
-                mapEle = getAllElements(ele.elements(), mapEle);
-            }
-        }
-        return mapEle;
+        return players;
     }
 
 
     private String getXmlPath() {
-        return path + "/user.xml";
+        return path + "/player.xml";
     }
 }

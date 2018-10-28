@@ -1,14 +1,14 @@
-package com.github.dice.domain;
+package com.github.dice.dto;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class RoomOwner {
+public class PlayerDTO {
 
     private String id;
 
     private String userName;
 
-    private String pwd;
+    private transient String pwd;
 
     public String getId() {
         return id;
@@ -38,4 +38,5 @@ public class RoomOwner {
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
     }
+
 }

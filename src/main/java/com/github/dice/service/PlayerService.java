@@ -6,20 +6,20 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PlayService {
+public class PlayerService {
 
-    public Player login(String userName, String pwd){
+    public Player login(String userName, String pwd) {
         for (Player player : PlayData.players) {
-            if(StringUtils.equalsIgnoreCase(player.getUserName(),userName) && StringUtils.equalsIgnoreCase(player.getPwd(),pwd)){
+            if (StringUtils.equalsIgnoreCase(player.getUserName(), userName) && StringUtils.equalsIgnoreCase(player.getPwd(), pwd)) {
                 return player;
             }
         }
         return null;
     }
 
-    public Player getPlayById(int userId){
+    public Player getPlayById(String userId) {
         for (Player player : PlayData.players) {
-            if(player.getId() == userId){
+            if (player.getId().equalsIgnoreCase(userId)) {
                 return player;
             }
         }

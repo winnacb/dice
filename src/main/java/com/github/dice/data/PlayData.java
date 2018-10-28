@@ -13,30 +13,30 @@ public class PlayData {
     static {
         Player emma = new Player();
         emma.setPwd("123");
-        emma.setId(1);
+        emma.setId("1");
         emma.setUserName("emma");
         players.add(emma);
 
         Player jacob = new Player();
         jacob.setPwd("123");
         jacob.setUserName("jacob");
-        jacob.setId(2);
+        jacob.setId("2");
         players.add(jacob);
 
         Player emily = new Player();
         emily.setPwd("123");
-        emily.setId(3);
+        emily.setId("3");
         emily.setUserName("emily");
         players.add(emily);
 
         Player william = new Player();
-        william.setId(4);
+        william.setId("4");
         william.setUserName("william");
         william.setPwd("123");
         players.add(william);
 
         Player hannah = new Player();
-        hannah.setId(5);
+        hannah.setId("5");
         hannah.setUserName("hannah");
         hannah.setPwd("123");
         players.add(hannah);
