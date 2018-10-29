@@ -20,7 +20,7 @@ import java.util.List;
 @Component
 public class RoomOwnerDao {
 
-    private static String ROOM_OWNER_NAME = "ROOM_OWNER_NAME";
+    private static String ROOM_OWNER_NAME = "roomOwnerName";
 
     private static String ROOM_OWNER_PWD = "roomOwnerPwd";
 
